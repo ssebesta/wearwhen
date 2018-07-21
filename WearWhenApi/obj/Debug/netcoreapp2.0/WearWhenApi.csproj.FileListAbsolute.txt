@@ -1,0 +1,10 @@
+C:\Users\steph\Documents\Visual Studio 2017\Projects\WearWhenApi\WearWhenApi\bin\Debug\netcoreapp2.0\WearWhenApi.deps.json
+C:\Users\steph\Documents\Visual Studio 2017\Projects\WearWhenApi\WearWhenApi\bin\Debug\netcoreapp2.0\WearWhenApi.runtimeconfig.json
+C:\Users\steph\Documents\Visual Studio 2017\Projects\WearWhenApi\WearWhenApi\bin\Debug\netcoreapp2.0\WearWhenApi.runtimeconfig.dev.json
+C:\Users\steph\Documents\Visual Studio 2017\Projects\WearWhenApi\WearWhenApi\bin\Debug\netcoreapp2.0\WearWhenApi.dll
+C:\Users\steph\Documents\Visual Studio 2017\Projects\WearWhenApi\WearWhenApi\obj\Debug\netcoreapp2.0\WearWhenApi.csproj.CoreCompileInputs.cache
+C:\Users\steph\Documents\Visual Studio 2017\Projects\WearWhenApi\WearWhenApi\obj\Debug\netcoreapp2.0\WearWhenApi.AssemblyInfoInputs.cache
+C:\Users\steph\Documents\Visual Studio 2017\Projects\WearWhenApi\WearWhenApi\obj\Debug\netcoreapp2.0\WearWhenApi.AssemblyInfo.cs
+C:\Users\steph\Documents\Visual Studio 2017\Projects\WearWhenApi\WearWhenApi\bin\Debug\netcoreapp2.0\WearWhenApi.pdb
+C:\Users\steph\Documents\Visual Studio 2017\Projects\WearWhenApi\WearWhenApi\obj\Debug\netcoreapp2.0\WearWhenApi.dll
+C:\Users\steph\Documents\Visual Studio 2017\Projects\WearWhenApi\WearWhenApi\obj\Debug\netcoreapp2.0\WearWhenApi.pdb
