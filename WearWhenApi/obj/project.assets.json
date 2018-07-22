@@ -12634,11 +12634,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\steph\\Documents\\Visual Studio 2017\\Projects\\WearWhenApi\\WearWhenApi\\WearWhenApi.csproj",
+      "projectUniqueName": "C:\\Users\\steph\\Documents\\github\\WearWhenApi\\WearWhenApi\\WearWhenApi.csproj",
       "projectName": "WearWhenApi",
-      "projectPath": "C:\\Users\\steph\\Documents\\Visual Studio 2017\\Projects\\WearWhenApi\\WearWhenApi\\WearWhenApi.csproj",
+      "projectPath": "C:\\Users\\steph\\Documents\\github\\WearWhenApi\\WearWhenApi\\WearWhenApi.csproj",
       "packagesPath": "C:\\Users\\steph\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\steph\\Documents\\Visual Studio 2017\\Projects\\WearWhenApi\\WearWhenApi\\obj\\",
+      "outputPath": "C:\\Users\\steph\\Documents\\github\\WearWhenApi\\WearWhenApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
