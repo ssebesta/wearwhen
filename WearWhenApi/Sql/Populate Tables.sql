@@ -50,6 +50,10 @@ insert into ClothingItemSubType (ClothingItemTypeId, [Name]) select Id, '' from 
 insert into ClothingItemSubType (ClothingItemTypeId, [Name]) select Id, '' from ClothingItemType where [Name] = 'Shoes'
 insert into ClothingItemSubType (ClothingItemTypeId, [Name]) select Id, '' from ClothingItemType where [Name] = 'Shoes'
 
+insert into ActivityType (Name) values ('Business Meeting')
+insert into ActivityType (Name) values ('Meetup with Friends/Family')
+insert into ActivityType (Name) values ('Date')
+
 
 select * from Outfit
 

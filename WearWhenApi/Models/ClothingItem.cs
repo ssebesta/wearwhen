@@ -23,6 +23,5 @@ namespace WearWhenApi.Models
 
         public ICollection<Outfit> Outfits { get; set; }
         public ICollection<ItemActivity> ItemActivities { get; set; }
-
     }
 }

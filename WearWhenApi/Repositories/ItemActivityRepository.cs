@@ -12,49 +12,63 @@ namespace WearWhenApi.Repositories
 {
     public class ItemActivityRepository: Repository<ItemActivity>, IRepository<ItemActivity>
     {
-        public ItemActivityRepository(IDbConnectionFactory connFactory) : base(connFactory)
+        private IRepository<Contact> _contactRepository;
+
+        public ItemActivityRepository(IDbConnectionFactory connFactory, IRepository<Contact> contactRepository) : base(connFactory)
         {
             _entityName = "ItemActivity";
             _entityNamePlural = "ItemActivities";
+
+            _contactRepository = contactRepository;
         }
 
-        public override ItemActivity Add(ItemActivity entity)
+        public override ItemActivity Add(ItemActivity itemActivity)
         {
             using (SqlConnection conn = _connectionFactory.GetDbConnection())
             {
-                entity = conn.Query<ItemActivity>("Add" + _entityName,
+                itemActivity = conn.Query<ItemActivity>("Add" + _entityName,
                                                   new
                                                   {
-                                                      clothingItemId = entity.ClothingItemId,
-                                                      outfitId = entity.OutfitId,
-                                                      activityTypeId = entity.ActivityTypeId,
-                                                      contactId = entity.ContactId,
-                                                      activityDate = entity.ActivityDate
+                                                      clothingItemId = itemActivity.ClothingItemId,
+                                                      outfitId = itemActivity.OutfitId,
+                                                      activityTypeId = itemActivity.ActivityTypeId,
+                                                      contactId = itemActivity.ContactId,
+                                                      activityDate = itemActivity.ActivityDate
+                                                  },
+                                                  commandType: CommandType.StoredProcedure).FirstOrDefault();
+
+                GetAdditionalEntityData(itemActivity, conn);
+            }           
+
+            return itemActivity;
+        }
+
+        public override ItemActivity Update(ItemActivity itemActivity)
+        {
+            using (SqlConnection conn = _connectionFactory.GetDbConnection())
+            {
+                itemActivity = conn.Query<ItemActivity>("Update" + _entityName,
+                                                  new
+                                                  {
+                                                      id = itemActivity.Id,
+                                                      clothingItemId = itemActivity.ClothingItemId,
+                                                      outfitId = itemActivity.OutfitId,
+                                                      activityTypeId = itemActivity.ActivityTypeId,
+                                                      contactId = itemActivity.ContactId,
+                                                      activityDate = itemActivity.ActivityDate
                                                   },
                                                   commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
 
-            return entity;
+            return itemActivity;
         }
 
-        public override ItemActivity Update(ItemActivity entity)
+        protected override void GetAdditionalEntityData(ItemActivity itemActivity, SqlConnection conn)
         {
-            using (SqlConnection conn = _connectionFactory.GetDbConnection())
+            if (itemActivity.ContactId != null)
             {
-                entity = conn.Query<ItemActivity>("Update" + _entityName,
-                                                  new
-                                                  {
-                                                      id = entity.Id,
-                                                      clothingItemId = entity.ClothingItemId,
-                                                      outfitId = entity.OutfitId,
-                                                      activityTypeId = entity.ActivityTypeId,
-                                                      contactId = entity.ContactId,
-                                                      activityDate = entity.ActivityDate
-                                                  },
-                                                  commandType: CommandType.StoredProcedure).FirstOrDefault();
+                itemActivity.Contact = _contactRepository.Get((int)itemActivity.ContactId);
             }
-
-            return entity;
         }
     }
 }
