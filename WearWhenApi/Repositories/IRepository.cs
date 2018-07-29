@@ -11,6 +11,7 @@ namespace WearWhenApi.Repositories
         IEnumerable<T> GetAll(int parentId);
         T Get(int id);
         T Add(T entity);
+        T Add(T entity, int parentId);
         T Update(T entity);
         void Delete(T entity);
     }

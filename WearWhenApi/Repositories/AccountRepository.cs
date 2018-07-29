@@ -65,16 +65,11 @@ namespace WearWhenApi.Repositories
             return result;
         }
 
-        public Account CreateAccount(dynamic content)
+        public override Account Add(Account entity)
         {
-            Account newAccount = null;
+            string password = entity.Password;
 
-            string contentString = content.ToString();
-            Dictionary<string, string> accountInfo = JsonConvert.DeserializeObject<Dictionary<string, string>>(contentString);
-
-            string password = accountInfo["password"];
-
-            // generate a 128-bit salt using a secure PRNG
+            // Generate a 128-bit salt using a secure PRNG
             byte[] salt = new byte[128 / 8];
             using (var rng = RandomNumberGenerator.Create())
             {
@@ -91,17 +86,17 @@ namespace WearWhenApi.Repositories
 
             using (SqlConnection conn = _connectionFactory.GetDbConnection())
             {
-                newAccount = conn.Query<Account>("CreateAccount", new { username = accountInfo["username"],
-                                                                        firstName = accountInfo["firstName"],
-                                                                        middleName = accountInfo["middleName"],
-                                                                        lastName = accountInfo["lastName"],
-                                                                        email = accountInfo["email"],
-                                                                        passwordHash = hashed,
-                                                                        salt = Convert.ToBase64String(salt)
-                                                                      }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                entity = conn.Query<Account>("AddAccount", new { username = entity.Username,
+                                                                    firstName = entity.FirstName,
+                                                                    middleName = entity.MiddleName,
+                                                                    lastName = entity.LastName,
+                                                                    email = entity.Email,
+                                                                    passwordHash = hashed,
+                                                                    salt = Convert.ToBase64String(salt)
+                                                                    }, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
 
-            return newAccount;
+            return entity;
         }
     }
 }

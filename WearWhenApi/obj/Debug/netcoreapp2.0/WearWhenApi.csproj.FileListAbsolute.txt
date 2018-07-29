@@ -18,3 +18,4 @@ C:\Users\steph\Documents\github\WearWhenApi\WearWhenApi\obj\Debug\netcoreapp2.0\
 C:\Users\steph\Documents\github\WearWhenApi\WearWhenApi\obj\Debug\netcoreapp2.0\WearWhenApi.AssemblyInfo.cs
 C:\Users\steph\Documents\github\WearWhenApi\WearWhenApi\obj\Debug\netcoreapp2.0\WearWhenApi.dll
 C:\Users\steph\Documents\github\WearWhenApi\WearWhenApi\obj\Debug\netcoreapp2.0\WearWhenApi.pdb
+C:\Users\steph\Documents\github\WearWhenApi\WearWhenApi\obj\Debug\netcoreapp2.0\WearWhenApi.csprojResolveAssemblyReference.cache

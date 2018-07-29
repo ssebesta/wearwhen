@@ -1,6 +1,6 @@
---exec CreateAccount 'x', '', 'y', 'y@y.com', 'y', 'lkjasdldfj', 'kjasjldffj'
+--exec AddAccount 'x', '', 'y', 'y@y.com', 'y', 'lkjasdldfj', 'kjasjldffj'
 
-alter proc CreateAccount (
+alter proc AddAccount (
 	@firstName nvarchar(100),
 	@middleName nvarchar(100),
 	@lastName nvarchar(100),
@@ -17,10 +17,10 @@ begin
 
 	declare @id int = cast(SCOPE_IDENTITY() as int)
 
-	select FirstName, MiddleName, LastName, Email, Username, CreatedDateTime
+	select Id, FirstName, MiddleName, LastName, Email, Username, CreatedDateTime
 	from Account
 	where Id = @id
 
 end
 
-grant execute on CreateAccount to public
+grant execute on AddAccount to public

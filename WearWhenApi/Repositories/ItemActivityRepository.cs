@@ -10,7 +10,7 @@ using WearWhenApi.Models;
 
 namespace WearWhenApi.Repositories
 {
-    public class ItemActivityRepository: Repository<ItemActivity>, IItemActivityRepository
+    public class ItemActivityRepository: Repository<ItemActivity>, IRepository<ItemActivity>
     {
         public ItemActivityRepository(IDbConnectionFactory connFactory) : base(connFactory)
         {

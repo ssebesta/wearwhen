@@ -47,8 +47,13 @@ namespace WearWhenApi.Repositories
 
             return entity;
         }
-
+        
         public virtual T Add(T entity)
+        {
+            throw new NotImplementedException();
+        }        
+
+        public virtual T Add(T entity, int parentId)
         {
             throw new NotImplementedException();
         }
@@ -60,7 +65,10 @@ namespace WearWhenApi.Repositories
 
         public virtual void Delete(T entity)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = _connectionFactory.GetDbConnection())
+            {
+                conn.Execute("Delete" + _entityName, new { id = entity.Id }, commandType: CommandType.StoredProcedure);
+            }
         }
 
         protected virtual void GetAdditionalEntityData(T entity, SqlConnection conn)

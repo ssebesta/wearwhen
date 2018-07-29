@@ -10,7 +10,7 @@ using WearWhenApi.Models;
 
 namespace WearWhenApi.Repositories
 {
-    public class ClothingItemRepository: Repository<ClothingItem>, IClothingItemRepository
+    public class ClothingItemRepository: Repository<ClothingItem>//, IRepository<ClothingItem>
     {
         public ClothingItemRepository(IDbConnectionFactory connFactory) : base(connFactory)
         {
@@ -18,61 +18,71 @@ namespace WearWhenApi.Repositories
             _entityNamePlural = "ClothingItems";
         }
 
-        protected override void GetAdditionalEntityData(ClothingItem entity, SqlConnection conn)
+        protected override void GetAdditionalEntityData(ClothingItem clothingItem, SqlConnection conn)
         {
-            if (entity != null)
+            if (clothingItem != null)
             {
                 // Get outfits
-                entity.Outfits = conn.Query<Outfit>("GetClothingItemOutfits", new { clothingItemId = entity.Id }, commandType: CommandType.StoredProcedure).ToList();
+                clothingItem.Outfits = conn.Query<Outfit>("GetClothingItemOutfits", new { clothingItemId = clothingItem.Id }, commandType: CommandType.StoredProcedure).ToList();
 
                 // Get activities
-                entity.ItemActivities = conn.Query<ItemActivity>("GetClothingItemActivities", new { clothingItemId = entity.Id }, commandType: CommandType.StoredProcedure).ToList();
+                clothingItem.ItemActivities = conn.Query<ItemActivity>("GetClothingItemActivities", new { clothingItemId = clothingItem.Id }, commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
-        public ClothingItem Add(ClothingItem entity, int outfitId)
+        public override ClothingItem Add(ClothingItem clothingItem)
+        {
+            return AddClothingItem(clothingItem);
+        }
+
+        public override ClothingItem Add(ClothingItem clothingItem, int outfitId)
+        {
+            return AddClothingItem(clothingItem, outfitId);
+        }
+
+        private ClothingItem AddClothingItem(ClothingItem clothingItem, int? outfitId = null)
         {
             using (SqlConnection conn = _connectionFactory.GetDbConnection())
             {
-                entity = conn.Query<ClothingItem>("Add" + _entityName,
+                clothingItem = conn.Query<ClothingItem>("Add" + _entityName,
                                                   new
                                                   {
-                                                      accountId = entity.AccountId,
-                                                      description = entity.Description,
-                                                      clothingItemTypeId = entity.ClothingItemTypeId,
-                                                      clothingItemSubTypeId = entity.ClothingItemSubTypeId,
-                                                      placeOfPurchase = entity.PlaceOfPurchase,
-                                                      dateOfPurchase = entity.DateOfPurchase,
-                                                      pricePaid = entity.PricePaid,
+                                                      accountId = clothingItem.AccountId,
+                                                      description = clothingItem.Description,
+                                                      clothingItemTypeId = clothingItem.ClothingItemTypeId,
+                                                      clothingItemSubTypeId = clothingItem.ClothingItemSubTypeId,
+                                                      placeOfPurchase = clothingItem.PlaceOfPurchase,
+                                                      dateOfPurchase = clothingItem.DateOfPurchase,
+                                                      pricePaid = clothingItem.PricePaid,
                                                       outfitId = outfitId
-                                                  }, 
+                                                  },
                                                   commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
 
-            return entity;
+            return clothingItem;
         }
 
-        public override ClothingItem Update(ClothingItem entity)
+        public override ClothingItem Update(ClothingItem clothingItem)
         {
             using (SqlConnection conn = _connectionFactory.GetDbConnection())
             {
-                entity = conn.Query<ClothingItem>("Update" + _entityName,
+                clothingItem = conn.Query<ClothingItem>("Update" + _entityName,
                                                   new
                                                   {
-                                                      id = entity.Id,
-                                                      description = entity.Description,
-                                                      clothingItemTypeId = entity.ClothingItemTypeId,
-                                                      clothingItemSubTypeId = entity.ClothingItemSubTypeId,
-                                                      placeOfPurchase = entity.PlaceOfPurchase,
-                                                      dateOfPurchase = entity.DateOfPurchase,
-                                                      pricePaid = entity.PricePaid
+                                                      id = clothingItem.Id,
+                                                      description = clothingItem.Description,
+                                                      clothingItemTypeId = clothingItem.ClothingItemTypeId,
+                                                      clothingItemSubTypeId = clothingItem.ClothingItemSubTypeId,
+                                                      placeOfPurchase = clothingItem.PlaceOfPurchase,
+                                                      dateOfPurchase = clothingItem.DateOfPurchase,
+                                                      pricePaid = clothingItem.PricePaid
                                                   },
                                                   commandType: CommandType.StoredProcedure).FirstOrDefault();
 
-                this.GetAdditionalEntityData(entity, conn);
+                this.GetAdditionalEntityData(clothingItem, conn);
             }
 
-            return entity;
+            return clothingItem;
         }
     }
 }

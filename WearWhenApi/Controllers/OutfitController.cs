@@ -6,13 +6,10 @@ using WearWhenApi.Models;
 using Newtonsoft.Json;
 
 namespace WearWhenApi.Controllers
-{
+{    
     public class OutfitController: BaseController<Outfit>
     {
-        public OutfitController(IRepository<Outfit> outfitRepository): base(outfitRepository)
-        {
-
-        }
+        public OutfitController(IRepository<Outfit> outfitRepository): base(outfitRepository) { }
         
     }
 }

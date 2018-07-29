@@ -17,7 +17,7 @@ namespace WearWhenApi.Controllers
             _repository = repository;
         }
 
-        [HttpGet("all/{parentId}", Name = "GetAll")]
+        [HttpGet("all/{parentId}")]
         public IActionResult GetAll(int parentId)
         {
             var item = _repository.GetAll(parentId);
@@ -30,7 +30,7 @@ namespace WearWhenApi.Controllers
             return new ObjectResult(item);
         }
 
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             var item = _repository.Get(id);
@@ -42,13 +42,27 @@ namespace WearWhenApi.Controllers
 
             return new ObjectResult(item);
         }
-
-        [HttpPost(Name = "Add")]
-        public IActionResult Add([FromBody]dynamic content)
+                  
+        /// <summary>
+        /// Add an entity to the database with an optional parent Id specified
+        /// </summary>
+        /// <param name="entity">The entity to add</param>
+        /// <param name="parentId">The parent Id of the entity.  Only specified if the entity is parented through a many
+        /// to many relationship; otherwise, the parent is specified as part of the model.</param>
+        /// <returns></returns>
+        [HttpPost]        
+        public IActionResult Add([FromBody] T entity, [FromQuery] int? parentId)
         {
-            T entity = JsonConvert.DeserializeObject<T>(content.ToString());
+            T item;
 
-            var item = _repository.Add(entity);
+            if (parentId != null)
+            {
+                item = _repository.Add(entity, (int)parentId);
+            }
+            else
+            {
+                item = _repository.Add(entity);
+            }
 
             if (item == null)
             {
@@ -56,13 +70,11 @@ namespace WearWhenApi.Controllers
             }
 
             return new ObjectResult(item);
-        }
+        }         
 
-        [HttpPut(Name = "Update")]
-        public IActionResult Update([FromBody]dynamic content)
+        [HttpPut]
+        public IActionResult Update([FromBody] T entity)
         {
-            T entity = JsonConvert.DeserializeObject<T>(content.ToString());
-
             var item = _repository.Update(entity);
 
             if (item == null)
