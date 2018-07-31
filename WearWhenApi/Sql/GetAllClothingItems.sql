@@ -1,5 +1,5 @@
-alter proc GetClothingItem (
-	@id int
+create proc GetAllClothingItems (
+	@accountId int
 )
 as
 begin
@@ -10,8 +10,8 @@ begin
 	from ClothingItem ci
 	  left outer join ClothingItemType t on (t.Id = ci.ClothingItemTypeId)
 		left outer join ClothingItemSubType st on (st.Id = ci.ClothingItemSubTypeId)
-	where ci.Id = @id
+	where ci.AccountId = @accountId
 
 end
 
-grant execute on GetClothingItem to public
+grant execute on GetAllClothingItems to public

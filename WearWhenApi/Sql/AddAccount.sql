@@ -17,7 +17,7 @@ begin
 
 	declare @id int = cast(SCOPE_IDENTITY() as int)
 
-	select Id, FirstName, MiddleName, LastName, Email, Username, CreatedDateTime
+	select Id, FirstName, MiddleName, LastName, Email, Username, CreatedDateTime, Salt, PasswordHash
 	from Account
 	where Id = @id
 
