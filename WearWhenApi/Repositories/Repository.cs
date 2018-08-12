@@ -22,9 +22,9 @@ namespace WearWhenApi.Repositories
             _connectionFactory = connFactory;
         }
 
-        public virtual IEnumerable<T> GetAll(int parentId)
+        public virtual List<T> GetAll(int parentId)
         {
-            IEnumerable<T> entities = null;
+            List<T> entities = null;
 
             using (SqlConnection conn = _connectionFactory.GetDbConnection())
             {

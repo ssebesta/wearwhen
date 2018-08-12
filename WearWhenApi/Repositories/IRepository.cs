@@ -8,7 +8,7 @@ namespace WearWhenApi.Repositories
 {
     public interface IRepository<T> where T: BaseModel
     {        
-        IEnumerable<T> GetAll(int parentId);
+        List<T> GetAll(int parentId);
         T Get(int id);
         T Add(T entity);
         T Add(T entity, int parentId);

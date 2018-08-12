@@ -85,5 +85,14 @@ namespace WearWhenApi.Controllers
             return new ObjectResult(item);
         }
 
+        [HttpDelete]
+        public IActionResult Delete([FromBody] T entity, [FromQuery] bool? cascade)
+        {
+            // TODO: handle cascade param
+            _repository.Delete(entity);
+
+            return Ok();
+        }
+
     }
 }

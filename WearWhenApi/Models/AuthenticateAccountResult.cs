@@ -8,7 +8,6 @@ namespace WearWhenApi.Models
 {
     public class AuthenticateAccountResult
     {
-        [Key]
         public int Id { get; set; }
         public bool Success { get; set; }
         public string ErrorMessage { get; set; }
