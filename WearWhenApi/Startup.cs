@@ -32,8 +32,11 @@ namespace WearWhenApi
 
             services.AddTransient<IDbConnectionFactory, DbConnectionFactory>();
             services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IRepository<ClothingItem>, ClothingItemRepository>();
             services.AddTransient<IRepository<Outfit>, OutfitRepository>();
-            services.AddTransient<IClothingItemRepository, ClothingItemRepository>();
+            services.AddTransient<IRepository<ItemActivity>, ItemActivityRepository>();
+            services.AddTransient<IRepository<Designer>, DesignerRepository>();
+            services.AddTransient<IRepository<Contact>, ContactRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

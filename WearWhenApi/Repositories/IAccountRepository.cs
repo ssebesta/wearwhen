@@ -9,6 +9,5 @@ namespace WearWhenApi.Repositories
     public interface IAccountRepository : IRepository<Account>
     {
         AuthenticateAccountResult AuthenticateAccount(string un, string pw);
-        Account CreateAccount(dynamic content);
     }
 }

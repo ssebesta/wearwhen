@@ -9,7 +9,9 @@ namespace WearWhenApi.Models
     public class ClothingItemSubType : BaseModel
     {
         public string Name { get; set; }
+        public int ClothingItemTypeId { get; set; }
         public ClothingItemType ClothingItemType { get; set; }
+        public int? AccountId { get; set; }
         public Account Account { get; set; }        
     }
 }

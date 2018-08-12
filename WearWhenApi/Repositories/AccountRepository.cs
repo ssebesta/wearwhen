@@ -6,11 +6,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using WearWhenApi.Models;
-using System.Security.Cryptography;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using WearWhenApi.Data;
+using WearWhenApi.Utils;
 
 namespace WearWhenApi.Repositories
 {
@@ -44,12 +44,7 @@ namespace WearWhenApi.Repositories
                 {
                     byte[] salt = Convert.FromBase64String(saltString);
 
-                    string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                        password: pw,
-                        salt: salt,
-                        prf: KeyDerivationPrf.HMACSHA1,
-                        iterationCount: 10000,
-                        numBytesRequested: 256 / 8));
+                    string hashed = Crypto.CreatePasswordHash(salt, pw);
 
                     Account authenticatedAccount = conn.Query<Account>("AuthenticateAccount", new { username = un, passwordHash = hashed }, commandType: CommandType.StoredProcedure).FirstOrDefault();
 
@@ -65,43 +60,65 @@ namespace WearWhenApi.Repositories
             return result;
         }
 
-        public Account CreateAccount(dynamic content)
+        public override Account Add(Account account)
         {
-            Account newAccount = null;
-
-            string contentString = content.ToString();
-            Dictionary<string, string> accountInfo = JsonConvert.DeserializeObject<Dictionary<string, string>>(contentString);
-
-            string password = accountInfo["password"];
-
-            // generate a 128-bit salt using a secure PRNG
-            byte[] salt = new byte[128 / 8];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            }
+            byte[] salt = Crypto.CreateSalt();
 
             // derive a 256-bit subkey (use HMACSHA1 with 10,000 iterations)
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: password,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA1,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
+            string hashed = Crypto.CreatePasswordHash(salt, account.Password);
 
             using (SqlConnection conn = _connectionFactory.GetDbConnection())
             {
-                newAccount = conn.Query<Account>("CreateAccount", new { username = accountInfo["username"],
-                                                                        firstName = accountInfo["firstName"],
-                                                                        middleName = accountInfo["middleName"],
-                                                                        lastName = accountInfo["lastName"],
-                                                                        email = accountInfo["email"],
+                account = conn.Query<Account>("Add" + _entityName, new { username = account.Username,
+                                                                        firstName = account.FirstName,
+                                                                        middleName = account.MiddleName,
+                                                                        lastName = account.LastName,
+                                                                        email = account.Email,
                                                                         passwordHash = hashed,
                                                                         salt = Convert.ToBase64String(salt)
                                                                       }, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
 
-            return newAccount;
+            return account;
         }
+
+        public override Account Update(Account account)
+        {
+            using (SqlConnection conn = _connectionFactory.GetDbConnection())
+            {
+                account = conn.Query<Account>("Update" + _entityName, new
+                                                                        {
+                                                                            id = account.Id,
+                                                                            username = account.Username,
+                                                                            firstName = account.FirstName,
+                                                                            middleName = account.MiddleName,
+                                                                            lastName = account.LastName,
+                                                                            email = account.Email,
+                                                                        }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+
+            return account;
+        }
+
+        public Account UpdatePassword(Account account)
+        {
+            byte[] salt = Crypto.CreateSalt();
+
+            string hashed = Crypto.CreatePasswordHash(salt, account.Password);
+
+
+            using (SqlConnection conn = _connectionFactory.GetDbConnection())
+            {
+                account = conn.Query<Account>("Update" + _entityName, new
+                                                                      {
+                                                                        id = account.Id,
+                                                                        passwordHash = hashed,
+                                                                        salt = salt
+                                                                      }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+
+            return account;
+        }
+
     }
 }

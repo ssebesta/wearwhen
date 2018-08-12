@@ -1,0 +1,132 @@
+﻿Account
+	- Get
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- GetAll
+		- Controller
+		- Repository
+		- Stored Procedure
+	- Add
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- Update
+		- Controller
+		- Repository - CHECK
+		- Stored Procedure - CHECK
+	- Delete
+		- Controller
+		- Repository
+		- Stored Procedure
+	- Update Password
+		- Controller
+		- Repository - CHECK
+		- Stored Procedure - CHECK
+ClothingItem
+	- Get
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- GetAll
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- Add
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- Update
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- Delete
+		- Controller
+		- Repository
+		- Stored Procedure
+Contact
+	- Get
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- GetAll
+		- Controller
+		- Repository
+		- Stored Procedure
+	- Add
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- Update
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- Delete
+		- Controller
+		- Repository
+		- Stored Procedure
+Designer
+	- Get
+		- Controller
+		- Repository
+		- Stored Procedure
+	- GetAll
+		- Controller
+		- Repository
+		- Stored Procedure
+	- Add
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- Update
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- Delete
+		- Controller
+		- Repository
+		- Stored Procedure
+ItemActivity
+	- Get
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- GetAll
+		- Controller
+		- Repository
+		- Stored Procedure
+	- Add
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- Update
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- Delete
+		- Controller
+		- Repository
+		- Stored Procedure
+Outfit
+	- Get
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- GetAll
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- Add
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- Update
+		- Controller
+		- Repository
+		- Stored Procedure - CHECK
+	- Delete
+		- Controller
+		- Repository
+		- Stored Procedure
+
+

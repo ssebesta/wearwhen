@@ -25,15 +25,14 @@ namespace WearWhenApi.Repositories
             {
                 entity.ClothingItems = conn.Query<ClothingItem>("GetOutfitClothingItems", new { outfitId = entity.Id }, commandType: CommandType.StoredProcedure).ToList();
 
-                entity.ItemActivities = conn.Query<ItemActivity>("GetOutfitActivites", new { outfitId = entity.Id }, commandType: CommandType.StoredProcedure).ToList();
+                entity.ItemActivities = conn.Query<ItemActivity>("GetOutfitActivities", new { outfitId = entity.Id }, commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
         public override Outfit Add(Outfit entity)
         {
             using (SqlConnection conn = _connectionFactory.GetDbConnection())
-            {
-                //entity = conn.Query<Outfit>("Add" + _entityName, new { description = entity.Description, accountId = entity.AccountId }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            {                
                 entity = conn.Query<Outfit>("Add" + _entityName, new { description = entity.Description, accountId = entity.AccountId }, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
 
