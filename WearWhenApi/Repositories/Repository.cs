@@ -14,12 +14,12 @@ namespace WearWhenApi.Repositories
     public class Repository<T> : IRepository<T> where T : BaseModel
     {
         protected IDbConnectionFactory _connectionFactory;
-        protected string _entityName;
-        protected string _entityNamePlural;    
+        protected string _entityName;   
 
         public Repository(IDbConnectionFactory connFactory)
-        {
+        {            
             _connectionFactory = connFactory;
+            _entityName = typeof(T).Name;
         }
 
         public virtual List<T> GetAll(int parentId)
@@ -28,7 +28,7 @@ namespace WearWhenApi.Repositories
 
             using (SqlConnection conn = _connectionFactory.GetDbConnection())
             {
-                entities = conn.Query<T>("GetAll" + _entityNamePlural, new { parentId = parentId }, commandType: CommandType.StoredProcedure).ToList();
+                entities = conn.Query<T>("Get" + _entityName + "List", new { parentId = parentId }, commandType: CommandType.StoredProcedure).ToList();
             }
 
             return entities;

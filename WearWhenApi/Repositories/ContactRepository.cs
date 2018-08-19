@@ -12,11 +12,7 @@ namespace WearWhenApi.Repositories
 {
     public class ContactRepository: Repository<Contact>
     {
-        public ContactRepository(IDbConnectionFactory connFactory) : base(connFactory)
-        {
-            _entityName = "Contact";
-            _entityNamePlural = "Contacts";
-        }
+        public ContactRepository(IDbConnectionFactory connFactory) : base(connFactory) { }
 
         public override Contact Add(Contact contact)
         {

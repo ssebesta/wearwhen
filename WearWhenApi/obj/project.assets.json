@@ -12520,7 +12520,7 @@
       ]
     },
     "System.Xml.XPath/4.3.0": {
-      "sha512": "fzUv0r/Xq58LxyL+wyxY3oigF+0Kc8+QFbIk0uEAhkKdymIQO0aKBD+FJfnJ5hAtddnzvcBaNqEHmY9VCInLXg==",
+      "sha512": "v1JQ5SETnQusqmS3RwStF7vwQ3L02imIzl++sewmt23VGygix04pEH+FCj1yWb+z4GDzKiljr1W7Wfvrx0YwgA==",
       "type": "package",
       "path": "system.xml.xpath/4.3.0",
       "files": [
@@ -12625,33 +12625,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\steph\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/Users/ssebesta/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\steph\\Documents\\github\\WearWhenApi\\WearWhenApi\\WearWhenApi.csproj",
+      "projectUniqueName": "/Users/ssebesta/Documents/Visual Studio/wearwhenapi/WearWhenApi/WearWhenApi.csproj",
       "projectName": "WearWhenApi",
-      "projectPath": "C:\\Users\\steph\\Documents\\github\\WearWhenApi\\WearWhenApi\\WearWhenApi.csproj",
-      "packagesPath": "C:\\Users\\steph\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\steph\\Documents\\github\\WearWhenApi\\WearWhenApi\\obj\\",
+      "projectPath": "/Users/ssebesta/Documents/Visual Studio/wearwhenapi/WearWhenApi/WearWhenApi.csproj",
+      "packagesPath": "/Users/ssebesta/.nuget/packages/",
+      "outputPath": "/Users/ssebesta/Documents/Visual Studio/wearwhenapi/WearWhenApi/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\steph\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/ssebesta/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -12668,22 +12663,23 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
+          "Microsoft.NETCore.App": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "2.0",
+            "autoReferenced": true
+          },
           "Dapper": {
             "target": "Package",
             "version": "1.50.5"
           },
-          "Microsoft.NETCore.App": {
+          "Microsoft.AspNetCore.All": {
             "target": "Package",
-            "version": "2.0.0",
-            "autoReferenced": true
+            "version": "2.0.0"
           },
           "System.Data.SqlClient": {
             "target": "Package",
             "version": "4.5.1"
-          },
-          "Microsoft.AspNetCore.All": {
-            "target": "Package",
-            "version": "2.0.0"
           }
         },
         "imports": [

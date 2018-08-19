@@ -12,11 +12,7 @@ namespace WearWhenApi.Repositories
 {
     public class DesignerRepository : Repository<Designer>
     {
-        public DesignerRepository(IDbConnectionFactory connFactory) : base(connFactory)
-        {
-            _entityName = "Designer";
-            _entityNamePlural = "Designers";
-        }
+        public DesignerRepository(IDbConnectionFactory connFactory) : base(connFactory) { }
 
         public override Designer Add(Designer designer)
         {

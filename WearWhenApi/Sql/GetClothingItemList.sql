@@ -1,4 +1,4 @@
-create proc GetAllClothingItems (
+﻿create proc GetClothingItemList (
 	@accountId int
 )
 as
@@ -14,4 +14,4 @@ begin
 
 end
 
-grant execute on GetAllClothingItems to public
+grant execute on GetClothingItemList to public

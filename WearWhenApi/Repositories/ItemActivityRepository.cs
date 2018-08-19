@@ -16,9 +16,6 @@ namespace WearWhenApi.Repositories
 
         public ItemActivityRepository(IDbConnectionFactory connFactory, IRepository<Contact> contactRepository) : base(connFactory)
         {
-            _entityName = "ItemActivity";
-            _entityNamePlural = "ItemActivities";
-
             _contactRepository = contactRepository;
         }
 

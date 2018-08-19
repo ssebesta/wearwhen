@@ -12,11 +12,7 @@ namespace WearWhenApi.Repositories
 {
     public class ClothingItemRepository: Repository<ClothingItem>//, IRepository<ClothingItem>
     {
-        public ClothingItemRepository(IDbConnectionFactory connFactory) : base(connFactory)
-        {
-            _entityName = "ClothingItem";
-            _entityNamePlural = "ClothingItems";
-        }
+        public ClothingItemRepository(IDbConnectionFactory connFactory) : base(connFactory) { }
 
         protected override void GetAdditionalEntityData(ClothingItem clothingItem, SqlConnection conn)
         {

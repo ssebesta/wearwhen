@@ -21,8 +21,10 @@ namespace WearWhenApi.Data
 
         public SqlConnection GetDbConnection()
         {
-            SqlConnection conn = new SqlConnection(_config.DefaultConnection);            
-
+            // TODO: _config.DefaultConnection keeps coming back null, but only on the Mac; works fine
+            // in VS2017 on a PC.  Need to troubleshoot.
+            //SqlConnection conn = new SqlConnection(_config.DefaultConnection);
+            SqlConnection conn = new SqlConnection("server=localhost;database=WearWhen;user=wearadmin;pwd=w3aR20!8");
             conn.Open();
 
             return conn;            

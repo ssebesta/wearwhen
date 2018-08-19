@@ -16,11 +16,7 @@ namespace WearWhenApi.Repositories
 {
     public class AccountRepository : Repository<Account>, IAccountRepository
     {        
-        public AccountRepository(IDbConnectionFactory connFactory) : base(connFactory)
-        {
-            _entityName = "Account";
-            _entityNamePlural = "Accounts";
-        }
+        public AccountRepository(IDbConnectionFactory connFactory) : base(connFactory) { }
 
         public AuthenticateAccountResult AuthenticateAccount(string un, string pw)
         {

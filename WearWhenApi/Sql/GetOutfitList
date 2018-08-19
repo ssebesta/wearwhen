@@ -1,4 +1,4 @@
-create proc GetAllOutfits (
+﻿create proc GetOutfitList (
 	@parentId int
 )
 as
@@ -10,4 +10,4 @@ begin
 
 end
 
-grant execute on GetAllOutfits to public
+grant execute on GetOutfitList to public
