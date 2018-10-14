@@ -8,6 +8,14 @@ drop table ClothingItem
 drop table Account
 */
 
+/*
+create database WearWhen
+
+create login wearadmin with password='w3aR20!8'
+*/
+
+use WearWhen
+go
 
 create table Account (
 	Id int identity(1,1),
@@ -44,6 +52,7 @@ create table ClothingItemType (
 	constraint PK_ClothingItemType_Id primary key clustered (Id asc),
 	constraint FK_ClothingItemType_Account foreign key (AccountId) references Account (Id)
 )
+go
 
 create table ClothingItemSubType (
 	Id int identity(1,1),
@@ -56,6 +65,7 @@ create table ClothingItemSubType (
 	constraint FK_ClothingItemSubType_ClothingItemType foreign key (ClothingItemTypeId) references ClothingItemType (Id),
 	constraint FK_ClothingItemSubType_Account foreign key (AccountId) references Account (Id)
 )
+go
 
 create table ClothingItem (
 	Id int identity(1,1),
@@ -86,6 +96,7 @@ create table Outfit (
 	constraint PK_Outfit_Id primary key clustered (Id asc),
 	constraint FK_Outfit_Account foreign key (AccountId) references Account (Id)	
 )
+go
 
 create Table OutfitXClothingItem (
 	Id int identity(1,1),
@@ -97,6 +108,7 @@ create Table OutfitXClothingItem (
 	constraint FK_OutfitXClothingItem_Outfit foreign key (OutfitId) references Outfit (Id),
 	constraint FK_OutfitXClothingItem_ClothingItem foreign key (ClothingItemId) references ClothingItem (Id)
 )
+go
 
 create table Contact (
 	Id int identity(1,1),
@@ -138,5 +150,225 @@ create table ItemActivity (
 )
 go
 
+create proc AddAccount (
+	@firstName nvarchar(100),
+	@middleName nvarchar(100),
+	@lastName nvarchar(100),
+	@email nvarchar(100),
+	@username nvarchar(100),
+	@passwordHash nvarchar(500),
+	@salt nvarchar(255)
+)
+as
+begin
+
+	insert into Account (FirstName, MiddleName, LastName, Email, Username, PasswordHash, Salt)
+	values (@firstName, @middleName, @lastName, @email, @username, @passwordHash, @salt)
+
+	declare @id int = cast(SCOPE_IDENTITY() as int)
+
+	select Id, FirstName, MiddleName, LastName, Email, Username, CreatedDateTime, Salt, PasswordHash
+	from Account
+	where Id = @id
+
+end
+GO
+grant execute on AddAccount to public
+GO
+
+create proc AddClothingItem (
+	@accountId int,
+	@description nvarchar(100),
+	@designerId int,
+	@clothingItemTypeId int,
+	@clothingItemSubTypeId int,
+	@placeOfPurchase nvarchar(255),
+	@dateOfPurchase date,
+	@pricePaid decimal(19,4),
+	@outfitId int = null
+)
+as
+begin
+
+	insert into ClothingItem (AccountId, Description, DesignerId, ClothingItemTypeId, ClothingItemSubTypeId, 
+														PlaceOfPurchase, DateOfPurchase, PricePaid)
+							      values (@accountId, @description, @designerId, @clothingItemTypeId, @clothingItemSubTypeId,
+												    @placeOfPurchase, @dateOfPurchase, @pricePaid)
+
+	declare @id int;
+
+	select @id = cast(SCOPE_IDENTITY() as int)
+
+	if (@outfitId != null)
+	begin
+
+		insert into OutfitXClothingItem (OutfitId, ClothingItemId) values (@outfitId, @id)
+
+	end
+
+	select Id, AccountId, Description, DesignerId, ClothingItemTypeId, ClothingItemSubTypeId, 
+		PlaceOfPurchase, DateOfPurchase, PricePaid
+	from ClothingItem
+	where Id = @id
+
+end
+GO
+grant execute on AddClothingItem to public
+go
+
+create proc AddContact (
+	@name nvarchar(255),
+	@accountId int
+)
+as
+begin
+
+	insert into Contact (Name, AccountId) values (@name, @accountId)
+
+	declare @id int
+
+	select Id, Name, AccountId, CreatedDateTime
+	from Contact
+	where Id = @id
+
+end
+go
+grant execute on AddContact to public
+go
+
+create proc AddDesigner (
+	@accountId int,
+	@name nvarchar(255)
+)
+as
+begin
+
+	insert into Designer (Name, AccountId) values (@name, @accountId)
+
+	select Id, Name, CreatedDateTime
+	from Designer
+	where Id = SCOPE_IDENTITY()
+
+end
+go
+grant execute on AddDesigner to public
+go
+
+create proc AddItemActivity (
+	@clothingItemId int,
+	@outfitId int,
+	@activityTypeId int,
+	@contactId int,
+	@activityDate date
+)
+as
+begin
+
+	insert into ItemActivity (ClothingItemId, OutfitId, ActivityTypeId, ContactId, ActivityDate)
+	values (@clothingItemId, @outfitId, @activityTypeId, @contactId, @activityDate)
+
+	declare @id int
+
+	select @id = cast(SCOPE_IDENTITY() as int)
+
+	select a.Id, a.ClothingItemId, a.OutfitId, a.ActivityTypeId, t.Name as ActivityTypeName, a.ContactId, a.ActivityDate, a.CreatedDateTime
+	from ItemActivity a
+		inner join ActivityType t on (a.ActivityTypeId = t.Id)
+	where a.Id = @id
+
+end
+go
+grant execute on AddItemActivity to public
+go
+
+create proc AddOutfit (
+	@description nvarchar(100),
+	@accountId int
+)
+as
+begin
+
+	insert into Outfit (Description, AccountId)
+							values (@description, @accountId)
+
+	declare @id int;
+
+	select @id = cast(SCOPE_IDENTITY() as int)
+
+	select Id, Description, AccountId, CreatedDateTime
+	from Outfit
+	where Id = @id
+
+end
+go
+grant execute on AddOutfit to public
+go
+
+create proc AuthenticateAccount (
+	@username nvarchar(100),
+	@passwordHash nvarchar(100)
+)
+as
+begin
+
+	select Id, FirstName, MiddleName, LastName, Email, Username, CreatedDateTime
+	from Account
+	where Username = @username
+		and PasswordHash = @passwordHash
+
+end
+go
+grant execute on AuthenticateAccount to public
+GO
+
+create proc GetAccount (
+	@id int
+)
+as
+begin
+
+	select Id, FirstName, MiddleName, LastName, Email, Username, CreatedDateTime
+	from Account
+	where Id = @id
+
+end
+go
+grant execute on GetAccount to public
+go
+
+create proc GetAccountSalt (
+	@username nvarchar(100),
+	@salt nvarchar(255) output
+)
+as
+begin
+
+	select @salt = Salt
+	from Account
+	where Username = @username
+
+end
+go
+grant execute on GetAccountSalt to public
+go
+
+create proc GetClothingItem (
+	@id int
+)
+as
+begin
+
+	select ci.Id, ci.AccountId, ci.Description, ci.DesignerId, ci.ClothingItemTypeId, t.Name as ClothingItemTypeName,
+		ci.ClothingItemSubTypeId, st.Name as ClothingItemSubTypeName, ci.PlaceOfPurchase, ci.DateOfPurchase, ci.PricePaid,
+		ci.CreatedDateTime, ci.LastUpdateDateTime
+	from ClothingItem ci
+	  left outer join ClothingItemType t on (t.Id = ci.ClothingItemTypeId)
+		left outer join ClothingItemSubType st on (st.Id = ci.ClothingItemSubTypeId)
+	where ci.Id = @id
+
+end
+go
+grant execute on GetClothingItem to public
+go
 
 

@@ -3,4 +3,9 @@
   <PropertyGroup>
     <WebStackScaffolding_DependencyDialogWidth>600</WebStackScaffolding_DependencyDialogWidth>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Remote' ">
+    <StartAction>Project</StartAction>
+    <LaunchUrl>api/values</LaunchUrl>
+    <ApplicationURL>http://192.168.1.93:52268/</ApplicationURL>
+  </PropertyGroup>
 </Project>

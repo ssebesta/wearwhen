@@ -66,12 +66,12 @@ namespace WearWhenApi.Repositories
             using (SqlConnection conn = _connectionFactory.GetDbConnection())
             {
                 account = conn.Query<Account>("Add" + _entityName, new { username = account.Username,
-                                                                        firstName = account.FirstName,
-                                                                        middleName = account.MiddleName,
-                                                                        lastName = account.LastName,
-                                                                        email = account.Email,
-                                                                        passwordHash = hashed,
-                                                                        salt = Convert.ToBase64String(salt)
+                                                                         firstName = account.FirstName,
+                                                                         middleName = account.MiddleName,
+                                                                         lastName = account.LastName,
+                                                                         email = account.Email,
+                                                                         passwordHash = hashed,
+                                                                         salt = Convert.ToBase64String(salt)
                                                                       }, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
 

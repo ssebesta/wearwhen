@@ -21,7 +21,8 @@ namespace WearWhenApi.Models
         public DateTime DateOfPurchase { get; set; }
         public decimal PricePaid { get; set; }
 
-        public ICollection<Outfit> Outfits { get; set; }
-        public ICollection<ItemActivity> ItemActivities { get; set; }
+        public List<Outfit> Outfits { get; set; }
+        public List<ItemActivity> ItemActivities { get; set; }
+        public List<ItemImage> ItemImages { get; set; }
     }
 }

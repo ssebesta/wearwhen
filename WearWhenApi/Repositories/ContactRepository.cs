@@ -14,24 +14,24 @@ namespace WearWhenApi.Repositories
     {
         public ContactRepository(IDbConnectionFactory connFactory) : base(connFactory) { }
 
-        public override Contact Add(Contact contact)
+        public override Contact Add(Contact entity)
         {
             using (SqlConnection conn = _connectionFactory.GetDbConnection())
             {
-                contact = conn.Query<Contact>("Add" + _entityName, new { name = contact.Name, accountId = contact.AccountId }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                entity = conn.Query<Contact>("Add" + _entityName, new { name = entity.Name, accountId = entity.AccountId }, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
 
-            return contact;
+            return entity;
         }
 
-        public override Contact Update(Contact contact)
+        public override Contact Update(Contact entity)
         {
             using (SqlConnection conn = _connectionFactory.GetDbConnection())
             {
-                contact = conn.Query<Contact>("Update" + _entityName, new { name = contact.Name }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                entity = conn.Query<Contact>("Update" + _entityName, new { name = entity.Name }, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
 
-            return contact;
+            return entity;
         }
 
     }
