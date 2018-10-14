@@ -23,6 +23,7 @@ C:/Users/steph/Documents/github/WearWhenApi/WearWhenApi/obj/Debug/netcoreapp2.0/
 /Users/ssebesta/Documents/Visual Studio/wearwhenapi/WearWhenApi/bin/Debug/netcoreapp2.0/WearWhenApi.runtimeconfig.dev.json
 /Users/ssebesta/Documents/Visual Studio/wearwhenapi/WearWhenApi/bin/Debug/netcoreapp2.0/WearWhenApi.dll
 /Users/ssebesta/Documents/Visual Studio/wearwhenapi/WearWhenApi/bin/Debug/netcoreapp2.0/WearWhenApi.pdb
+/Users/ssebesta/Documents/Visual Studio/wearwhenapi/WearWhenApi/obj/Debug/netcoreapp2.0/WearWhenApi.csprojAssemblyReference.cache
 /Users/ssebesta/Documents/Visual Studio/wearwhenapi/WearWhenApi/obj/Debug/netcoreapp2.0/WearWhenApi.csproj.CoreCompileInputs.cache
 /Users/ssebesta/Documents/Visual Studio/wearwhenapi/WearWhenApi/obj/Debug/netcoreapp2.0/WearWhenApi.AssemblyInfoInputs.cache
 /Users/ssebesta/Documents/Visual Studio/wearwhenapi/WearWhenApi/obj/Debug/netcoreapp2.0/WearWhenApi.AssemblyInfo.cs

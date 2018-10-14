@@ -1,26 +1,23 @@
 ﻿<Properties StartupConfiguration="{E52B26D0-6CEB-4D21-8262-FB6EF1F62D37}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="WearWhenApi/Repositories/ClothingItemRepository.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WearWhenApi/Models/ClothingItem.cs">
     <Files>
       <File FileName="WearWhenApi/Sql/UpdateOutfit.sql" Line="21" Column="1" />
-      <File FileName="WearWhenApi/Sql/Populate Tables.sql" Line="60" Column="1" />
+      <File FileName="WearWhenApi/Sql/Populate Tables.sql" Line="62" Column="22" />
       <File FileName="WearWhenApi/Models/Account.cs" Line="1" Column="1" />
-      <File FileName="WearWhenApi/Controllers/AccountController.cs" Line="16" Column="1" />
-      <File FileName="WearWhenApi/Repositories/AccountRepository.cs" Line="80" Column="1" />
-      <File FileName="WearWhenApi/Data/DbConnectionFactory.cs" Line="27" Column="1" />
-      <File FileName="WearWhenApi/Startup.cs" Line="1" Column="1" />
-      <File FileName="WearWhenApi/appsettings.Development.json" Line="4" Column="90" />
-      <File FileName="WearWhenApi/Data/DbConfig.cs" Line="1" Column="1" />
-      <File FileName="WearWhenApi/Sql/GetAccountSalt.sql" Line="16" Column="35" />
-      <File FileName="WearWhenApi/Models/Outfit.cs" Line="1" Column="1" />
-      <File FileName="WearWhenApi/Repositories/Repository.cs" Line="22" Column="42" />
-      <File FileName="WearWhenApi/Sql/GetClothingItemList.sql" Line="17" Column="47" />
-      <File FileName="WearWhenApi/Sql/GetClothingItemActivityList" Line="13" Column="55" />
-      <File FileName="WearWhenApi/Sql/GetOutfitList" Line="14" Column="1" />
-      <File FileName="WearWhenApi/Repositories/OutfitRepository.cs" Line="16" Column="88" />
-      <File FileName="WearWhenApi/Repositories/ItemActivityRepository.cs" Line="18" Column="10" />
-      <File FileName="WearWhenApi/Repositories/DesignerRepository.cs" Line="15" Column="89" />
-      <File FileName="WearWhenApi/Repositories/ContactRepository.cs" Line="15" Column="88" />
-      <File FileName="WearWhenApi/Repositories/ClothingItemRepository.cs" Line="15" Column="93" />
+      <File FileName="WearWhenApi/Controllers/AccountController.cs" Line="1" Column="1" />
+      <File FileName="WearWhenApi/Repositories/AccountRepository.cs" Line="69" Column="74" />
+      <File FileName="WearWhenApi/Data/DbConnectionFactory.cs" Line="27" Column="107" />
+      <File FileName="WearWhenApi/Models/ItemImage.cs" Line="8" Column="42" />
+      <File FileName="WearWhenApi/Models/ClothingItem.cs" Line="5" Column="30" />
+      <File FileName="WearWhenApi/Repositories/Repository.cs" Line="1" Column="1" />
+      <File FileName="WearWhenApi/Repositories/ItemImageRepository.cs" Line="29" Column="27" />
+      <File FileName="WearWhenApi/Repositories/OutfitRepository.cs" Line="28" Column="1" />
+      <File FileName="WearWhenApi/Repositories/ItemActivityRepository.cs" Line="17" Column="1" />
+      <File FileName="WearWhenApi/Controllers/ItemActivityController.cs" Line="10" Column="1" />
+      <File FileName="WearWhenApi/Controllers/ItemImageController.cs" Line="19" Column="1" />
+      <File FileName="WearWhenApi/Models/Outfit.cs" Line="17" Column="56" />
+      <File FileName="WearWhenApi/Utils/FileDownloader.cs" Line="33" Column="10" />
+      <File FileName="WearWhenApi/Controllers/ClothingItemController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

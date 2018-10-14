@@ -19,9 +19,25 @@ namespace WearWhenApi.Repositories
         {
             if (entity != null)
             {
+                // Get ClothingItems
                 entity.ClothingItems = conn.Query<ClothingItem>("GetOutfitClothingItems", new { outfitId = entity.Id }, commandType: CommandType.StoredProcedure).ToList();
 
+                // Get Activities
                 entity.ItemActivities = conn.Query<ItemActivity>("GetOutfitActivities", new { outfitId = entity.Id }, commandType: CommandType.StoredProcedure).ToList();
+
+                // Get Images
+                entity.ItemImages = conn.Query<ItemImage>("GetOutfitImages", new { outfitId = entity.Id }, commandType: CommandType.StoredProcedure).ToList();
+
+                // Get contacts for the outfit's activities
+                List<Contact> contacts = conn.Query<Contact>("GetOutfitContacts", new { outfitId = entity.Id }, commandType: CommandType.StoredProcedure).ToList();
+
+                foreach(ItemActivity itemActivity in entity.ItemActivities)
+                {
+                    if (itemActivity.ContactId != null)
+                    {
+                        itemActivity.Contact = contacts.Where(c => c.Id == itemActivity.ContactId).FirstOrDefault();
+                    }
+                }
             }
         }
 

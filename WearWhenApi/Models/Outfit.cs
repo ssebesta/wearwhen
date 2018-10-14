@@ -12,7 +12,8 @@ namespace WearWhenApi.Models
         public int AccountId { get; set; }
         public Account Account { get; set; }        
 
-        public ICollection<ClothingItem> ClothingItems { get; set; }
-        public ICollection<ItemActivity> ItemActivities { get; set; }
+        public List<ClothingItem> ClothingItems { get; set; }
+        public List<ItemActivity> ItemActivities { get; set; }
+        public List<ItemImage> ItemImages { get; set; }
     }
 }
