@@ -15,20 +15,20 @@ namespace WearWhenApi.Repositories
     {
         protected IDbConnectionFactory _connectionFactory;
         protected string _entityName;
-        protected string _entityNamePlural;    
+        protected string _entityNamePlural;
 
         public Repository(IDbConnectionFactory connFactory)
         {
             _connectionFactory = connFactory;
         }
 
-        public virtual IEnumerable<T> GetAll(int parentId)
+        public virtual List<T> GetAll(int parentId)
         {
-            IEnumerable<T> entities = null;
+            List<T> entities = null;
 
             using (SqlConnection conn = _connectionFactory.GetDbConnection())
             {
-                entities = conn.Query<T>("GetAll" + _entityNamePlural, new { parentId = parentId }, commandType: CommandType.StoredProcedure).ToList();
+                entities = conn.Query<T>("Get" + _entityName + "List", new { parentId = parentId }, commandType: CommandType.StoredProcedure).ToList();
             }
 
             return entities;
@@ -53,6 +53,11 @@ namespace WearWhenApi.Repositories
             throw new NotImplementedException();
         }
 
+        public virtual T Add(T entity, int parentId)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual T Update(T entity)
         {
             throw new NotImplementedException();
@@ -60,7 +65,10 @@ namespace WearWhenApi.Repositories
 
         public virtual void Delete(T entity)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = _connectionFactory.GetDbConnection())
+            {
+                conn.Execute("Delete" + _entityName, new { id = entity.Id }, commandType: CommandType.StoredProcedure);
+            }
         }
 
         protected virtual void GetAdditionalEntityData(T entity, SqlConnection conn)
