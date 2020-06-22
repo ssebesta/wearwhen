@@ -28,7 +28,7 @@ namespace WearWhenApi.Repositories
 
             using (SqlConnection conn = _connectionFactory.GetDbConnection())
             {
-                entities = conn.Query<T>("GetAll" + _entityNamePlural, new { parentId = parentId }, commandType: CommandType.StoredProcedure).ToList();
+                entities = conn.Query<T>("Get" + _entityName + "List", new { parentId = parentId }, commandType: CommandType.StoredProcedure).ToList();
             }
 
             return entities;
